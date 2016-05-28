@@ -1,0 +1,14 @@
+{
+  "name": "lib",
+  "description": "",
+  "main": "gulpfile.js",
+  "license": "ISC",
+  "homepage": "https://github.com/abidina/ng-address-book",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

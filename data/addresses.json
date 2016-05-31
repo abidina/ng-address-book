@@ -1,0 +1,22 @@
+{
+  "addresses": {
+      "address0": {
+        "name": "James",
+        "phone": "123-312-1236",
+        "location": "Hernando, MS",
+        "isContacted": false
+      },
+      "address1": {
+        "name": "Josh",
+        "phone": "123-312-1234",
+        "location": "Chattanooga, TN",
+        "isContacted": false
+      },  
+      "address2": {
+        "name": "Anna",
+        "phone": "123-312-1235",
+        "location": "Nashville, TN",
+        "isContacted": true
+      }
+  }
+}    

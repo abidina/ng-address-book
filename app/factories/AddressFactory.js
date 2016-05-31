@@ -107,6 +107,6 @@ var updateCompletedStatus = function(newAddress) {
 
 
 
-return {updateAddress:updateAddress, getSingleAddress:getSingleAddress, getAddressList:getAddressList, deleteAddress:deleteAddress, postNewAddress:postNewAddress, updateCompletedStatus:updateCompletedStatus};
+return {updateCompletedStatus:updateCompletedStatus, updateAddress:updateAddress, getSingleAddress:getSingleAddress, getAddressList:getAddressList, deleteAddress:deleteAddress, postNewAddress:postNewAddress};
 
 });

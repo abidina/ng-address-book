@@ -1,44 +1,99 @@
-<h1>In Progress</h1>
+<h1>Address Book</h1>  
 <div class="row">
-  <div class="col-xs-6 col-xs-offset-3">
-    <div class="input-group">
-      <span class="input-group-btn">
-        <button class="btn btn-default">
-          <i class="fa fa-search" aria-hidden="true"></i>
-        </button>
-      </span>
-      <input type="text" class="form-control" placeholder="Search for..." ng-model="searchText" /> 
+    <div class="col-xs-6 col-xs-offset-3">
+        <div class="input-group search-bar-spacing">
+            <span class="input-group-btn">
+                <button class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </span>
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="searchText">
+        </div>
     </div>
-  </div>
 </div>
+
+
+
+<h3>In Progress</h3>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-7">Name</div>
+        <div class="col-xs-2">Phone</div>
+        <div class="col-xs-1">Location</div>            
+        <div class="col-xs-1"></div>
+    </div>
+</div>
+
+<div ng-repeat="address in addresses | filter: searchText">
+    <div class="panel panel-default" ng-hide="address.isContacted">
+        <div class="panel-body">
+            <div class="col-xs-1"><input type="checkbox" ng-model="address.isContacted" ng-change="inputChange(address)"/></div>
+            <div class="col-xs-7"><a ng-href="#/addresses/{{address.id}}">{{address.name}}</a></div>
+            <div class="col-xs-2">{{address.phone}}</div>
+            <div class="col-xs-1">{{address.location}}</div>            
+            <div class="col-xs-1"><button class="btn btn-danger" ng-click="addressDelete(address.id)"><i class="fa fa-trash" aria-hidden="true"></i></button></div>
+        </div>
+    </div>
+</div>
+
+
+<h3>Contacted</h3>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-7">Name</div>
+        <div class="col-xs-2">Phone</div>
+        <div class="col-xs-1">Location</div>            
+        <div class="col-xs-1"></div>
+    </div>
+</div>
+
+<div ng-repeat="address in addresses | filter: {isContacted: true}">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-xs-1"><input type="checkbox" ng-model="address.isContacted" ng-change="inputChange(address)"/></div>
+            <div class="col-xs-7"><a ng-href="#/addresses/{{address.id}}">{{address.name}}</a></div>
+            <div class="col-xs-2">{{address.phone}}</div>
+            <div class="col-xs-1">{{address.location}}</div>            
+            <div class="col-xs-1"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ********************************************************************** -->
+
+<!-- 
+
+<h1>New</h1>
 <div class="container-fluid">
-  <div ng-repeat="address in addresses | filter: searchText | filter: {isCompleted: false}">
+  <div ng-repeat="address in addresses | filter: searchText | filter: {isContacted: false}">
     <div class="panel panel-default">
       <div class="panel-body">
-      <div class="col-xs-1"><input type="checkbox" name="" ng-model="address.isCompleted" ng-change= "statusChange(address)"/></div>
+      <div class="col-xs-1"><input type="checkbox" name="" ng-model="address.isContacted" ng-change= "statusChange(address)"/></div>
         <div class="col-xs-6"><a ng-href= firebaseURL + "/addresses/{{address.id}}">{{address.task}}</a></div> 
         <div class="col-xs-2">{{address.dueDate}}</div>
         <div class="col-xs-1">{{address.assignedTo}}</div>
-        <div class="col-xs-1"><button class="btn btn-danger" ng-click="itemDelete(address.id)"><i class="fa fa-trash" aria-hidden="true"></i>
+        <div class="col-xs-1"><button class="btn btn-danger" ng-click="addressDelete(address.id)"><i class="fa fa-trash" aria-hidden="true"></i>
         </button></div>
       </div>
     </div>
   </div>
 </div>
 
-<h1>Completed</h1>
+<h1>Contacted</h1>
 <div class="container-fluid">
-  <div ng-repeat="address in addresses | filter: {isCompleted: true}">
+  <div ng-repeat="address in addresses | filter: {isContacted: true}">
     <div class="panel panel-default">
       <div class="panel-body">
-      <div class="col-xs-1"><input type="checkbox" name="" ng-model="address.isCompleted" ng-change= "statusChange(address)"/></div>
+      <div class="col-xs-1"><input type="checkbox" name="" ng-model="address.isContacted" ng-change= "statusChange(address)"/></div>
         <div class="col-xs-6"><a ng-href= firebaseURL + "/addresses/{{address.id}}">{{address.task}}</a></div> 
         <div class="col-xs-2">{{address.dueDate}}</div>
         <div class="col-xs-1">{{address.assignedTo}}</div>
         <div class="col-xs-1">{{address.location}}</div>
-        <div class="col-xs-1"><button class="btn btn-danger" ng-click="itemDelete(address.id)"><i class="fa fa-trash" aria-hidden="true"></i>
+        <div class="col-xs-1"><button class="btn btn-danger" ng-click="addressDelete(address.id)"><i class="fa fa-trash" aria-hidden="true"></i>
         </button></div>
       </div>
     </div>
   </div>
-</div>
+</div> -->

@@ -3,8 +3,10 @@ app.factory("addressStorage", function($q, $http, firebaseURL, AuthFactory) {
     var addresses = [];
     let user = AuthFactory.getUser();
     return $q(function (resolve, reject) {
-      $http.get(`${firebaseURL}addresses.json?orderBy="uid"&equalTo="${user.uid}"`) 
-        .success(function(itemObject) {
+      // $http.get(`${firebaseURL}addresses.json?orderBy="uid"&equalTo=${user.uid}`)       
+      // $http.get(firebaseURL + 'addresses.json?orderBy=' + uid + '&equalTo=' + user.uid)
+      $http.get(`${firebaseURL}items.json?orderBy="uid"&equalTo="${user.uid}"`) 
+        .success(function(addressObject) {
           var addressCollection = addressObject;
           Object.keys(addressCollection).forEach(function(key) {
             addressCollection[key].id=key;
@@ -28,17 +30,17 @@ var deleteAddress = function(addressId){
         });
     };
 
-var postNewAddress = function(newItem){
+var postNewAddress = function(newAddress){
     let user = AuthFactory.getUser();
     console.log("user", user);
     return $q(function(resolve, reject) {
         $http.post(
             firebaseURL + "addresses.json",
             JSON.stringify({
-                name: newItem.name,
-                phone: newItem.phone,
-                location: newItem.location,
-                isContacted: newItem.isContacted,
+                name: newAddress.name,
+                phone: newAddress.phone,
+                location: newAddress.location,
+                isContacted: newAddress.isContacted,
                 uid: user.uid
             })
         )
@@ -53,8 +55,8 @@ var postNewAddress = function(newItem){
 var getSingleAddress = function(addressId){
     return $q(function(resolve, reject){
         $http.get(firebaseURL + "addresses/"+ addressId +".json")
-            .success(function(itemObject){
-                resolve(itemObject);
+            .success(function(addressObject){
+                resolve(addressObject);
             })
             .error(function(error){
                 reject(error);
@@ -62,16 +64,16 @@ var getSingleAddress = function(addressId){
     });
 };
 
-var updateAddress = function(addressId, newItem){
+var updateAddress = function(addressId, newAddress){
     let user = AuthFactory.getUser();
     return $q(function(resolve, reject) {
         $http.put(
             firebaseURL + "addresses/" + addressId + ".json",
             JSON.stringify({
-                name: newItem.name,
-                phone: newItem.phone,
-                location: newItem.location,
-                isContacted: newItem.isContacted,
+                name: newAddress.name,
+                phone: newAddress.phone,
+                location: newAddress.location,
+                isContacted: newAddress.isContacted,
                 uid: user.uid
             })
         )
@@ -83,16 +85,15 @@ var updateAddress = function(addressId, newItem){
     });
 };
 
-var updateStatus = function(newItem) {
+var updateCompletedStatus = function(newAddress) {
     return $q(function(resolve, reject) {
         $http.put(
-            firebaseURL + "addresses/" + newItem.id + ".json",
+            firebaseURL + "addresses/" + newAddress.id + ".json",
             JSON.stringify({
-                name: newItem.name,
-                phone: newItem.phone,
-                location: newItem.location,
-                isContacted: newItem.isContacted,
-                // uid: user.uid
+                name: newAddress.name,
+                phone: newAddress.phone,
+                location: newAddress.location,
+                isContacted: newAddress.isContacted,
             })
         )
         .success(
@@ -106,6 +107,6 @@ var updateStatus = function(newItem) {
 
 
 
-return {updateAddress:updateAddress, getSingleAddress:getSingleAddress, getAddressList:getAddressList, deleteAddress:deleteAddress, postNewAddress:postNewAddress, updateStatus:updateStatus};
+return {updateAddress:updateAddress, getSingleAddress:getSingleAddress, getAddressList:getAddressList, deleteAddress:deleteAddress, postNewAddress:postNewAddress, updateCompletedStatus:updateCompletedStatus};
 
 });

@@ -1,18 +1,19 @@
-app.controller("AddressNewCtrl", function($scope, $http, $location, addressStorage) {
+app.controller("AddressNewCtrl", function($scope, $location, addressStorage) {
   $scope.title = "New Address";
   $scope.submitButtonText = "Add New Address";
 
-  $scope.newTask = {
+  $scope.newAddress = {
     name:"",
     phone:"",
     location:"",
     isContacted:false,
+    uid:""
   };
 
 
 
   $scope.addNewAddress = function(){
-    addressStorage.postNewAddress($scope.newTask)
+    addressStorage.postNewAddress($scope.newAddress)
       .then(function successCallback(response) {
         $location.url("/addresses/list");
       });

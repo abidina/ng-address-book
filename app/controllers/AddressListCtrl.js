@@ -1,4 +1,4 @@
-app.controller("AddressListCtrl", function($scope, $http, $location, addressStorage) {
+app.controller("AddressListCtrl", function($scope, $location, addressStorage) {
   $scope.addresses= [];
 
   addressStorage.getAddressList().then(function(addressCollection){
@@ -13,9 +13,9 @@ app.controller("AddressListCtrl", function($scope, $http, $location, addressStor
       });
     };
 
-    $scope.statusChange = function(placeholder) {
-      addressStorage.updateStatus(placeholder).then(function(placeholder) {
-
+    $scope.statusChange = function(address) {
+      addressStorage.updatedCompletedStatus(address).then(function(response) {
+          console.log(response);
       });
     };
 

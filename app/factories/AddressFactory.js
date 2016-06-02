@@ -1,12 +1,12 @@
 app.factory("addressStorage", function($q, $http, firebaseURL, AuthFactory) {
+
   var getAddressList = function() {
     var addresses = [];
     let user = AuthFactory.getUser();
     return $q(function (resolve, reject) {
-      // $http.get(`${firebaseURL}addresses.json?orderBy="uid"&equalTo=${user.uid}`)       
-      // $http.get(firebaseURL + 'addresses.json?orderBy=' + uid + '&equalTo=' + user.uid)
-      $http.get(`${firebaseURL}items.json?orderBy="uid"&equalTo="${user.uid}"`) 
+      $http.get(`${firebaseURL}addresses.json?orderBy="uid"&equalTo="${user.uid}"`) 
         .success(function(addressObject) {
+        console.log(addressObject);
           var addressCollection = addressObject;
           Object.keys(addressCollection).forEach(function(key) {
             addressCollection[key].id=key;

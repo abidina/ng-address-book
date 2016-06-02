@@ -6,6 +6,7 @@ app.controller("AddressListCtrl", function($scope, $location, addressStorage) {
   });
 
     $scope.addressDelete= function(addressId) {
+      console.log(addressId);
       addressStorage.deleteAddress(addressId).then(function(response) {
         addressStorage.getAddressList().then(function(addressCollection){
           $scope.addresses = addressCollection;
